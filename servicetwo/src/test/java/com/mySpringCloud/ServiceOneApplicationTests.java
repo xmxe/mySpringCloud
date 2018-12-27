@@ -1,4 +1,4 @@
-package com.service;
+package com.mySpringCloud;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
