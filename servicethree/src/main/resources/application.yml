@@ -6,11 +6,38 @@ spring:
   cloud:
     gateway:
       routes:
-      - id: baidu
-        uri: http://www.baidu.com/
+      - id: 163
+        uri: http://www.163.com/
         predicates:
-        - Path=/baidu/**
+        - Path=/163/**
+
+      - id: test
+        uri: lb://servicetwo #http://localhost:8084/servicetwo/stwo?name=a 8084端口访问8083端口的servicetwo服务
+        predicates:
+        - Path=/locator/**   #http://localhost:8084/locator/stwo?name=a 访问servicetwo服务
+        filters:
+            - StripPrefix=1 # 去除请求地址中的locator
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true #设置服务名小写，默认false 服务名大写
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8081/eureka/
+
+hystrix:
+  command:
+    #默认的超时时间设置
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+    # commandKey，默认为方法名
+    getProductOrderList:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+
