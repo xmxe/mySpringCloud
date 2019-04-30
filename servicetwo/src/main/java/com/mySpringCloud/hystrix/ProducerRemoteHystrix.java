@@ -1,10 +1,13 @@
 package com.mySpringCloud.hystrix;
 
+import com.mySpringCloud.service.FeignClientService;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProducerRemoteHystrix{
-    public String getPort() {
-        return "Producer Server 的服务调用失败";
+public class ProducerRemoteHystrix implements FeignClientService{
+
+    @Override
+    public String serviceOne(String name) {
+        return "feign调用失败";
     }
 }
