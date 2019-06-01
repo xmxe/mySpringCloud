@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GateWayController {
 
     @RequestMapping("/hello")
-	public String hello(String name){return "负载均衡,hello,这是由serviceone发布的--- "+name;}
+	public String hello(String name){return "负载均衡,hello,这是由serviceone发布的，将由feign调用--- "+name;}
 
     @HystrixCommand(fallbackMethod = "fallback")
     @RequestMapping("/hystrix")

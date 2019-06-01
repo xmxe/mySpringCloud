@@ -11,7 +11,7 @@ public class RibbonController {
     RestTemplate restTemplate;
 
     @RequestMapping("/hello")
-	public String hello(String name){return "hello,这是由serviceone发布的--- "+name;}
+	public String hello(String name){return "hello,这是由serviceone发布的,会由feign调用--- "+name;}
 
 	//访问此接口调用其他注册的微服务
     @RequestMapping("/sone")
