@@ -53,25 +53,26 @@ public class SecurityConfiguration  {
 
 //    /guest/**的接口会被允许所有人访问，包括未登录的人。
 //    /admin/**的接口只能被拥有admin角色的用户访问。
-//    /**的接口可以被所有已经登录的用户访问。
+//    /auth/**的接口可以被所有已经登录的用户访问。
 //    /permission1/的接口可以被拥有permission1权限的用户访问。/permission2/、/permission3/**、/permission4/**同理
-   /* @Bean
+    @Bean
     public WebSecurityConfigurerAdapter webSecurityConfigurerAdapter() {
         return new WebSecurityConfigurerAdapter() {
             @Override
             public void configure(HttpSecurity httpSecurity) throws Exception {
-                httpSecurity.authorizeRequests().antMatchers("/guest/**").permitAll().
-                        and().authorizeRequests().antMatchers("/admin/**").hasRole("admin").
-                        and().authorizeRequests().antMatchers("/").authenticated().
+                httpSecurity.authorizeRequests().antMatchers("/guest/**","/").permitAll().
+                        and().authorizeRequests().antMatchers("/admin/**").hasRole("adminRole").
+                        and().authorizeRequests().antMatchers("/auth/**").authenticated().
                         and().authorizeRequests().antMatchers("/permission1/**").hasAuthority("permission1").
                         and().authorizeRequests().antMatchers("/permission2/**").hasAuthority("permission2").
                         and().authorizeRequests().antMatchers("/permission3/**").hasAuthority("permission3").
                         and().authorizeRequests().antMatchers("/permission4/**").hasAuthority("permission4").
-                        //and().formLogin().loginPage("/login").successForwardUrl("/hello").failureForwardUrl("/error_mapped").
                         and().authorizeRequests().anyRequest().permitAll().
+                        and().formLogin().loginPage("/login").successForwardUrl("/hello").failureForwardUrl("/error_mapped").
+
                         and().csrf().disable();
             }
         };
-    }*/
+    }
 
 }
