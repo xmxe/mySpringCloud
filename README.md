@@ -1,12 +1,12 @@
 # mySpringCloud
 ## serviceone
-- springcloud ribbon
-- springcloud config server
+- spring cloud ribbon
+- spring cloud config server
 ## servicetwo
-- springcloud feign
-- springcloud config client
+- spring cloud feign
+- spring cloud config client
 ## servicethree
-- springcloud gateway
-- springcloud hystrix
+- spring cloud gateway
+- spring cloud hystrix
 ## servicefour
-- springcloud zuul
+- spring cloud security
