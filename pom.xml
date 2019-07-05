@@ -15,7 +15,7 @@
 		<module>servicethree</module>
 		<module>servicefour</module>
 		<module>security-common</module>
-    	</modules>
+    </modules>
 
 	<description>Spring Cloud project</description>
 
