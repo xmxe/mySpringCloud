@@ -14,9 +14,9 @@ public class SecurityController {
     @ResponseBody
     public String hi(String name){return "负载均衡，hi,这是由servicetwo提供的，将由ribbon调用-- "+name;}
 
-    @RequestMapping("/hello")
+    @RequestMapping("/index")
     public String hello() {
-        return "hello";
+        return "index";
     }
 
     @RequestMapping("/login")
@@ -29,6 +29,12 @@ public class SecurityController {
     @ResponseBody
     public String getAdminData() {
         return "adminData";
+    }
+
+    @GetMapping("auth/getData")
+    @ResponseBody
+    public String getAuthData() {
+        return "authData";
     }
 
     @GetMapping("guest/getData")
