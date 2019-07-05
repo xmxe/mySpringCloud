@@ -17,7 +17,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration  {
+public class SecurityConfiguration {
 
     @Autowired
     LoginService loginService; //https://zhuanlan.zhihu.com/p/67519928
@@ -60,15 +60,15 @@ public class SecurityConfiguration  {
         return new WebSecurityConfigurerAdapter() {
             @Override
             public void configure(HttpSecurity httpSecurity) throws Exception {
-                httpSecurity.authorizeRequests().antMatchers("/guest/**","/").permitAll().
+                httpSecurity.authorizeRequests().antMatchers("/guest/**").permitAll().
                         and().authorizeRequests().antMatchers("/admin/**").hasRole("adminRole").
-                        and().authorizeRequests().antMatchers("/auth/**").authenticated().
+                        and().authorizeRequests().antMatchers("/auth/**","/").authenticated().
                         and().authorizeRequests().antMatchers("/permission1/**").hasAuthority("permission1").
                         and().authorizeRequests().antMatchers("/permission2/**").hasAuthority("permission2").
                         and().authorizeRequests().antMatchers("/permission3/**").hasAuthority("permission3").
                         and().authorizeRequests().antMatchers("/permission4/**").hasAuthority("permission4").
                         and().authorizeRequests().anyRequest().permitAll().
-                        and().formLogin().loginPage("/login").successForwardUrl("/hello").failureForwardUrl("/error_mapped").
+                        and().formLogin().loginPage("/login").successForwardUrl("/index").failureForwardUrl("/login").
 
                         and().csrf().disable();
             }

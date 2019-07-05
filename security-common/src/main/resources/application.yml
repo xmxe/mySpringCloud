@@ -1,0 +1,21 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: security-common
+
+  devtools:
+    restart:
+      #exclude: templates/**,static/** #不重启
+      #additional-paths: src/main/java  #重启
+      enabled: false #都不重启
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/jnhouse?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: root
+
+
+
