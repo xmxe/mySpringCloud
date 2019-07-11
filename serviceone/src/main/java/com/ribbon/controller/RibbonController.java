@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 public class RibbonController {
     @Autowired
     RestTemplate restTemplate;
+
     //@Autowired
     //HttpServletRequest request;
 
