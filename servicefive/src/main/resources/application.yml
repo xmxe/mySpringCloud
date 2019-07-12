@@ -1,0 +1,30 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: servicefive
+
+  thymeleaf:
+    prefix: classpath:/templates/ # 不加这个，接口自动到resources/templates目录下找与接口返回的相同名称的html，如访问localhost:8085/hello 自动跳转到hello.html
+    cache: false
+
+  devtools:
+    restart:
+      #exclude: templates/**,static/** #不重启
+      #additional-paths: src/main/java  #重启
+      enabled: false #都不重启
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka/
+
+zuul:
+  routes:
+    api-a:
+      path: /api-a/**
+      serviceId: serviceone
+    gitee:
+      path: /gitee/**
+      url : https://gitee.com

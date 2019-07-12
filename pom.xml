@@ -10,11 +10,12 @@
 	
 	<modules>
 		<module>eureka-server</module>
+		<module>security-common</module>
 		<module>serviceone</module>
 		<module>servicetwo</module>
 		<module>servicethree</module>
 		<module>servicefour</module>
-		<module>security-common</module>
+		<module>servicefive</module>
     </modules>
 
 	<description>Spring Cloud project</description>
