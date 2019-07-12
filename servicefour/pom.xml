@@ -85,6 +85,12 @@
 		<dependency>
 			<groupId>com.mySpringCloud</groupId>
 			<artifactId>security-common</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.security.oauth.boot</groupId>
+					<artifactId>spring-security-oauth2-autoconfigure</artifactId>
+				</exclusion>
+			</exclusions>
 			<version>1.0.0</version>
 		</dependency>
 
