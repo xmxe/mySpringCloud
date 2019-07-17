@@ -21,17 +21,44 @@ spring:
         uri: http://www.163.com/
         predicates:
         - Path=/163/**
+#        - Host=**.foo.org
+#        - Method=GET
+#        - Header=X-Request-Id, \d+
+#        - Query=foo, ba.
+#        - Query=baz
+#        - Cookie=chocolate, ch.p
+#        - After=2018-01-20T06:06:06+08:00[Asia/Shanghai]
+#        - RemoteAddr=192.168.1.1/24
 
       - id: test
         uri: lb://servicetwo #http://localhost:8084/servicetwo/stwo?name=a 8084端口访问8083端口的servicetwo服务
         predicates:
         - Path=/locator/**   #http://localhost:8084/locator/stwo?name=a 访问servicetwo服务
         filters:
-            - StripPrefix=1 # 去除请求地址中的locator
+            - StripPrefix=1  # 去除请求地址中的locator 不加的话就会访问localhost:8083/locator/stwo?name=a
+#            - PrefixPath=/mypath  #StripPrefix 正相反，是在 URL 路径前面添加一部分的前缀
+#            - name : RequestRateLimiter  #限流的name必须是RequestRateLimiter
+#              nama : Hystrix     #gateway 熔断路由器
+#              name: Retry        #重试路由器
+#              args:
+#                redis-rate-limiter.replenishRate: 10  #允许用户每秒处理多少个请求
+#                redis-rate-limiter.burstCapacity: 20  #令牌桶的容量，允许在一秒钟内完成的最大请求数
+#                key-resolver: "#{@userKeyResolver}"  #使用 SpEL 按名称引用 bean
+#                name: fallbackcmd
+#                fallbackUri: forward:/incaseoffailureusethis
+#                retries: 3  #重试次数，默认值是 3 次
+#                statuses: BAD_GATEWAY  #HTTP 的状态返回码 取值请参考：org.springframework.http.HttpStatus
+#                methods：指定哪些方法的请求需要进行重试逻辑，默认值是 GET 方法，取值参考：org.springframework.http.HttpMethod
+#                series：一些列的状态码配置，取值参考：org.springframework.http.HttpStatus.Series。符合的某段状态码才会进行重试逻辑，默认值是 SERVER_ERROR，值是 5，也就是 5XX(5 开头的状态码)，共有5 个值。
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true #设置服务名小写，默认false 服务名大写
+#  redis:
+#    host: 192.168.236.132
+#    port: 6379
+#    password: 123456
+
 eureka:
   client:
     serviceUrl:
