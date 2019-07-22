@@ -16,6 +16,8 @@
 		<module>servicethree</module>
 		<module>servicefour</module>
 		<module>servicefive</module>
+		<module>cas-client1</module>
+		<module>cas-client2</module>
     </modules>
 
 	<description>Spring Cloud project</description>
