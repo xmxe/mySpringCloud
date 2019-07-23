@@ -3,6 +3,13 @@ cas:
   server-login-url: http://192.168.236.131:8080/cas/login
   client-host-url: http://localhost:9100
   validation-type: cas
+  use-session: true
+
+casClientLogoutUrl : http://192.168.236.131:8080/cas/logout?service=http://127.0.0.1:9100/logout
+
+udf:
+  ignorePattern : /logout|/index
+  ignoreUrlPatternType :
 
 server:
   port: 9100
