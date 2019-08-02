@@ -15,10 +15,6 @@ spring:
       #additional-paths: src/main/java  #重启
       enabled: false #都不重启
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8081/eureka/
 
 zuul:
   routes:
@@ -28,3 +24,8 @@ zuul:
     gitee:
       path: /gitee/**
       url : https://gitee.com
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

@@ -1,8 +1,8 @@
 # mySpringCloud
-|         serviceone         |         servicetwo         |     servicethree     |      servicefour      |    servicefive    |
-| :------------------------: | :------------------------: | :------------------: | :-------------------: | :---------------: |
-|    spring cloud ribbon     |     spring cloud feign     | spring cloud gateway | spring cloud security | spring cloud zuul |
-| spring cloud config server | spring cloud config client | spring cloud hystrix |                       |                   |
+|         serviceone         |         servicetwo          |     servicethree     |      servicefour      |         servicefive         |
+| :------------------------: | :-------------------------: | :------------------: | :-------------------: | :-------------------------: |
+|    spring cloud ribbon     |     spring cloud feign      | spring cloud gateway | spring cloud security |      spring cloud zuul      |
+| spring cloud config server | spring cloud config client1 | spring cloud hystrix |                       | spring cloud config client2 |
 
 ***
 #### spring boot+cas
