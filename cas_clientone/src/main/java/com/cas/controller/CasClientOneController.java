@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class CasClientOController {
+public class CasClientOneController {
     @RequestMapping("/c1")
     @ResponseBody
     public String c1(){

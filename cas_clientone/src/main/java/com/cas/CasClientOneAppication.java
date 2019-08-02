@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @EnableCasClient
 @SpringBootApplication
-public class CasClientOAppication {
+public class CasClientOneAppication {
     public static void main(String[] args) {
-        SpringApplication.run(CasClientOAppication.class,args);
+        SpringApplication.run(CasClientOneAppication.class,args);
     }
 }

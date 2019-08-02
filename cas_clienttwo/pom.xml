@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mySpringCloud</groupId>
-	<artifactId>cas-client1</artifactId>
+	<artifactId>cas_clienttwo</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>cas-client1</name>
+	<name>cas_clienttwo</name>
 	<description>Spring Cloud project</description>
 
 	<parent>
@@ -25,6 +25,7 @@
 
 	<dependencies>
 
+		<!-- https://mvnrepository.com/artifact/net.unicon.cas/cas-client-autoconfig-support -->
 		<dependency>
 			<groupId>net.unicon.cas</groupId>
 			<artifactId>cas-client-autoconfig-support</artifactId>
