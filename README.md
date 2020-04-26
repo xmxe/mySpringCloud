@@ -58,3 +58,5 @@
 
 [Spring Cloud 20000 字总结！](https://mp.weixin.qq.com/s/34w6qqhEh8pFMMsL-X1dzg)
 
+[1.5W 字搞懂 Spring Cloud，太牛了！](https://mp.weixin.qq.com/s/EHPKm50KmHq_KZIHyVef3A)
+
