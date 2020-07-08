@@ -60,5 +60,3 @@
 
 [1.5W 字搞懂 Spring Cloud，太牛了！](https://mp.weixin.qq.com/s/EHPKm50KmHq_KZIHyVef3A)
 
-[现在的学生太厉害！冒着挂科的风险写的 Spring Cloud 总结](https://mp.weixin.qq.com/s/NZf7fXKV8y47nb9QnNx68w)
-
