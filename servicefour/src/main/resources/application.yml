@@ -36,7 +36,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8081/eureka/
+      defaultZone: http://localhost:8081/xmxe/
 
 management:
   endpoints:

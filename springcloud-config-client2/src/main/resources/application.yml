@@ -1,0 +1,18 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: configClient2_Service
+
+  devtools:
+    restart:
+      #exclude: templates/**,static/** #不重启
+      #additional-paths: src/main/java  #重启
+      enabled: false #都不重启
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

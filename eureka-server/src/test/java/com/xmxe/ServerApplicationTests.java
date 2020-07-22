@@ -1,4 +1,4 @@
-package com.eureka;
+package com.xmxe;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
