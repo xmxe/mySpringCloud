@@ -1,8 +1,9 @@
-package com.zuul.config;
+package com.xmxe.config;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class MyZuulFilter extends ZuulFilter {
 
-    private static Logger log = Logger.getLogger(MyZuulFilter.class);
+    private static Logger log = LogManager.getLogger(MyZuulFilter.class);
     @Override
     public String filterType() {
         return "pre";//pre：路由之前 routing：路由之时post： 路由之后 error：发送错误调用

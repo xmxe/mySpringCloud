@@ -1,0 +1,32 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: zuul_Service
+
+  devtools:
+    restart:
+      #exclude: templates/**,static/** #不重启
+      #additional-paths: src/main/java  #重启
+      enabled: false #都不重启
+
+zuul:
+  routes:
+    api-a:
+      path: /api-a/**
+      serviceId: providerService #http://localhost:8089/api-a/hello_ribbon?name=a
+    bd:
+      path: /bd/**
+      url : https://www.baidu.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka/
