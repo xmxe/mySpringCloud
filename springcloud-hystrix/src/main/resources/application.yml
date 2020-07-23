@@ -1,0 +1,37 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: hystrix_Service
+
+  devtools:
+    #restart:
+    #exclude: templates/**,static/** #不重启
+    #additional-paths: src/main/java  #重启
+    enabled: false #都不重启
+
+#  redis:
+#    host: 192.168.236.132
+#    port: 6379
+#    password: 123456
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka/
+
+hystrix:
+  command:
+    #默认的超时时间设置
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+    # commandKey，默认为方法名
+    getProductOrderList:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+
