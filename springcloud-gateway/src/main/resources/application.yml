@@ -34,7 +34,7 @@ spring:
             - StripPrefix=1  # 去除请求地址中的前一个后缀
 #            - PrefixPath=/mypath  #StripPrefix 正相反，是在 URL 路径前面添加前缀
 #            - name : RequestRateLimiter  #限流的name必须是RequestRateLimiter
-#              nama : Hystrix     #gateway 熔断路由器
+#              nama : Hystrix     #xmxe 熔断路由器
 #              name: Retry        #重试路由器
 #              args:
 #                redis-rate-limiter.replenishRate: 10  #允许用户每秒处理多少个请求
