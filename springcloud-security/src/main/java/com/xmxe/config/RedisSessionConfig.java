@@ -1,4 +1,4 @@
-package com.security.config;
+package com.xmxe.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
@@ -6,4 +6,5 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @Configuration
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = 10)
 public class RedisSessionConfig {
+
 }

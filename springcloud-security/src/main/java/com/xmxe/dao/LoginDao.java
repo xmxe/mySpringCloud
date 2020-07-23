@@ -1,6 +1,6 @@
-package com.security.dao;
+package com.xmxe.dao;
 
-import com.security.entity.User;
+import com.xmxe.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

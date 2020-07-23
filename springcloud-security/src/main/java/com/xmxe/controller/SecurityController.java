@@ -1,4 +1,4 @@
-package com.security.controller;
+package com.xmxe.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;

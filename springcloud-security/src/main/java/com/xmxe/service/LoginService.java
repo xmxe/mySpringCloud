@@ -1,7 +1,7 @@
-package com.security.service;
+package com.xmxe.service;
 
-import com.security.dao.LoginDao;
-import com.security.entity.User;
+import com.xmxe.dao.LoginDao;
+import com.xmxe.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.security.entity;
+package com.xmxe.entity;
 
 public class User {
     private String username;

@@ -10,13 +10,16 @@
 	
 	<modules>
 		<module>eureka-server</module>
-		<!--spring security 未完全集成 较为重量级的权限组件-->
-		<module>security-common</module>
-		<module>serviceone</module>
-		<module>servicetwo</module>
-		<module>servicethree</module>
-		<module>servicefour</module>
-		<module>servicefive</module>
+		<module>springcloud-config-server</module>
+		<module>springcloud-config-client</module>
+		<module>springcloud-config-client2</module>
+		<module>springcloud-ribbon</module>
+		<module>springcloud-feign</module>
+		<module>springcloud-gateway</module>
+		<module>springcloud-hystrix</module>
+		<module>springcloud-provider</module>
+		<module>springcloud-zuul</module>
+		<module>springcloud-security</module>
 		<!-- spring boot cas单点登陆 -->
 		<module>cas_clientone</module>
 		<module>cas_clienttwo</module>

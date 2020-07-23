@@ -1,6 +1,6 @@
-package com.security.config;
+package com.xmxe.config;
 
-import com.security.service.LoginService;
+import com.xmxe.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,7 @@ public class SecurityConfiguration {
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
-            List<com.security.entity.User> users = loginService.getUserByUsername(username);
+            List<com.xmxe.entity.User> users = loginService.getUserByUsername(username);
             if (users == null || users.size() == 0) {
                 throw new UsernameNotFoundException("用户名未找到");
             }

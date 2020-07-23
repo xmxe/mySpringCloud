@@ -3,13 +3,13 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mySpringCloud</groupId>
-	<artifactId>servicefour</artifactId>
+	<groupId>com.xmxe</groupId>
+	<artifactId>springcloud-security</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>servicefour</name>
-	<description>Spring Cloud project</description>
+	<name>springcloud-security</name>
+	<description>springcloud-security project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -24,15 +24,10 @@
 	</properties>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -48,8 +43,7 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-log4j</artifactId>
-			<version>1.3.8.RELEASE</version>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 
 		<dependency>
@@ -58,8 +52,29 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-security</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-oauth2</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId><!-- 模板引擎 -->
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<version>RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
 		<dependency>
@@ -81,18 +96,18 @@
 			<artifactId>commons-pool2</artifactId>
 		</dependency>
 
+		<!-- 引入自定义的依赖
 		<dependency>
 			<groupId>com.mySpringCloud</groupId>
-			<artifactId>security-common</artifactId>
+			<artifactId>xmxe-common</artifactId>
 			<exclusions>
 				<exclusion>
-					<groupId>org.springframework.security.oauth.boot</groupId>
-					<artifactId>spring-security-oauth2-autoconfigure</artifactId>
+					<groupId>org.springframework.xmxe.oauth.boot</groupId>
+					<artifactId>spring-xmxe-oauth2-autoconfigure</artifactId>
 				</exclusion>
 			</exclusions>
 			<version>1.0.0</version>
-		</dependency>
-
+		</dependency>-->
 	</dependencies>
 
 	<dependencyManagement>
