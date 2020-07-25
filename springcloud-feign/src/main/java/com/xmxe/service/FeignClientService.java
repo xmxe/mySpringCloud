@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(value = "providerService",fallback = ProducerRemoteHystrix.class,configuration = FeiginConfig.class)
 public interface FeignClientService {
+
     @RequestMapping(value = "/hello_feign", method = RequestMethod.GET)
     String hello_feign(@RequestParam(value = "name") String name);
 

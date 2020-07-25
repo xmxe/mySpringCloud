@@ -1,19 +1,27 @@
 server:
   port: 8088
+
 spring:
   application:
     name: hystrix_Service
 
   devtools:
-    #restart:
-    #exclude: templates/**,static/** #不重启
-    #additional-paths: src/main/java  #重启
-    enabled: false #都不重启
-
-#  redis:
-#    host: 192.168.236.132
-#    port: 6379
-#    password: 123456
+    restart:
+      #exclude: templates/**,static/** #不重启
+      #additional-paths: src/main/java  #重启
+      enabled: false #都不重启
+  redis:
+    host: 192.168.236.132
+    port: 6379
+    password: 123456
+    timeout: 3000
+    lettuce:
+      pool:
+        max-active: 200
+        max-idle: 20
+        min-idle: 5
+        max-wait: -1ms
+    database: 0
 
 eureka:
   client:
@@ -34,4 +42,3 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 3000
-

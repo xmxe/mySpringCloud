@@ -12,8 +12,6 @@ public class ConfigClientController {
     @Value("${jdbcUrl}")
     String jdbcUrl;
 
-    //从spring cloud config(git)上获取得到的
-
     @RequestMapping("/getJdbcUrl")
     @ResponseBody
     public String getJdbcUrl() {

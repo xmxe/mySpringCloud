@@ -11,7 +11,6 @@ public class FeignClientController {
     @Autowired
     FeignClientService feignClient;
 
-
     //调用其他注册的微服务
     @GetMapping(value = "feign")
     @ResponseBody

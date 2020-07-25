@@ -17,20 +17,6 @@ spring:
     username: root
     password: root
 
-
-  redis:
-    host: 192.168.236.132
-      port: 6379
-        password: 123456
-        timeout: 3000
-        lettuce:
-          pool:
-            max-active: 200
-            max-idle: 20
-            min-idle: 5
-            max-wait: -1ms
-          database: 0
-
   thymeleaf:
     prefix: classpath:/templates/ # 不加这个，接口自动到resources/templates目录下找与接口返回的相同名称的html，如访问localhost:8085/hello 自动跳转到hello.html
     cache: false

@@ -2,14 +2,31 @@ package com.xmxe.controller;
 
 import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @DefaultProperties(defaultFallback = "defaultFallback")
 public class HystrixController {
 
+
+    @RequestMapping("/session_redis1")
+    @ResponseBody
+    public String redis_session(HttpServletRequest request){
+        //HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpSession session = request.getSession();
+        String name = (String) session.getAttribute("name");
+        if(StringUtils.isEmpty(name)){
+            name = "SessionRedis1|" + System.currentTimeMillis();
+            session.setAttribute("name", name);
+        }
+        return name;
+    }
     @HystrixCommand(fallbackMethod = "fallback")
     @RequestMapping("/hystrix")
     @ResponseBody
