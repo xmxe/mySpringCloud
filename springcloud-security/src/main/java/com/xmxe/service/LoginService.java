@@ -19,6 +19,7 @@ public class LoginService {
     public List<User> getUserByUsername(String username) {
         return loginDao.getUserByUsername(username);
     }
+
     public List<String> getPermissionsByUsername(String username) {
         return loginDao.getPermissionsByUsername(username);
     }

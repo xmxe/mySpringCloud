@@ -23,29 +23,15 @@ public class LoginDao {
     }
 
     public List<String> getPermissionsByUsername(String username) {
-        String sql =
-                "select d.permission\n" +
-                        "from user a\n" +
-                        "       join user_r_role b on a.id = b.userid\n" +
-                        "       join role_r_permission c on b.roleid = c.roleid\n" +
-                        "       join permission d on c.permissionid = d.id\n" +
-                        "where a.username = ?\n" +
-                        "union\n" +
-                        "select c.permission\n" +
-                        "from user a\n" +
-                        "       join user_r_permission b on a.id = b.userid\n" +
-                        "       join permission c on b.permissionid = c.id\n" +
-                        "where a.username = ?";
+        String sql = "select d.permission from user a join user_r_role b on a.id = b.userid join user_role_r_permission c on b.roleid = c.roleid " +
+                     "join user_permission d on c.permissionid = d.id where a.username = ? union " +
+                     "select c.permission from user a join user_r_permission b on a.id = b.userid join user_permission c on b.permissionid = c.id " +
+                     "where a.username = ?";
         return jdbcTemplate.queryForList(sql, new String[]{username, username}, String.class);
     }
 
     public List<String> getRoleByUsername(String username) {
-        String sql =
-                "select c.role\n" +
-                        "from user a\n" +
-                        "       join user_r_role b on a.id = b.userid\n" +
-                        "       join role c on b.roleid = c.id\n" +
-                        "where a.username = ?";
+        String sql = "select c.role from user a join user_r_role b on a.id = b.userid join user_role c on b.roleid = c.id  where a.username = ?";
         return jdbcTemplate.queryForList(sql, new String[]{username}, String.class);
     }
 }

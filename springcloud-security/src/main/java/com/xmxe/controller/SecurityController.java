@@ -1,32 +1,50 @@
 package com.xmxe.controller;
 
+import com.xmxe.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-//@RestController //注意：要跳转到html页面@controller很重要，不要使用@restcontroller，因为他是返回json
 @Controller
 public class SecurityController {
 
-    @RequestMapping("/hi")
-    @ResponseBody
-    public String hi(String name){return "负载均衡，hi,这是由servicetwo提供的，将由ribbon调用-- "+name;}
+    @Autowired
+    LoginService loginService;
 
-    @RequestMapping("/index")
-    public String hello() {
-        return "index";
-    }
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public String login() {
         return "login";
     }
+   /* @PostMapping("/doLogin")
+    public String doLogin(String username,String password) {
+        System.out.println(username+"------------"+password);
+        return "index";
+    }*/
 
+    /*@GetMapping("/index")
+    public String index() {
+        return "index";
+    }*/
+
+    /*@GetMapping("/error")
+    public String loginFailed() {
+        return "error";
+    }*/
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "login";
+    }
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
 
     @GetMapping("admin/getData")
     @ResponseBody
@@ -64,22 +82,5 @@ public class SecurityController {
         return "permission3Data";
     }
 
-    @GetMapping("permission4/getData")
-    @ResponseBody
-    public String getPermission4Data() {
-        return "permission4Data";
-    }
 
-    @RequestMapping("/session_redis")
-    @ResponseBody
-    public String redis_session(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        String name = (String) session.getAttribute("name");
-        if(StringUtils.isEmpty(name)){
-            name = "testSessionRedis|" + System.currentTimeMillis();
-            session.setAttribute("name", name);
-        }
-        System.out.println("访问端口：" + request.getServerPort());
-        return name;
-    }
 }
