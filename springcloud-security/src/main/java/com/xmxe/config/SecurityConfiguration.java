@@ -70,7 +70,7 @@ public class SecurityConfiguration {
                     .formLogin()
                         .loginPage("/login")
                         .loginProcessingUrl("/doLogin")
-                        //.defaultSuccessUrl("/index")
+                        //.defaultSuccessUrl("/hello",true) //配置默认首页 加true相当于successForwardUrl 二者区别见下方注释
                         //.usernameParameter("name")//不配置的话登陆表单参数必须为username
                         //.passwordParameter("passwd")//不配置的话登陆表单参数必须为password
                         //.failureForwardUrl("/error")
@@ -95,12 +95,27 @@ public class SecurityConfiguration {
                         .and()
                     .csrf().disable();
             }
+
+          /*  //代码创建用户密码
+            @Override
+            protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+                auth.inMemoryAuthentication()
+                        .withUser("user")
+                        .password("password")
+                        .roles("USER")
+                        .and()
+                        .withUser("admin")
+                        .password("admin")
+                        .roles("USER", "ADMIN");
+            }*/
+
         };
+
     }
 
     @Bean
     PasswordEncoder passwordEncoder() {
-//        return NoOpPasswordEncoder.getInstance();//不加密 只能存在与demo中
+//        return NoOpPasswordEncoder.getInstance();//不加密 在demo中测试使用 生产环境不建议
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
@@ -141,4 +156,9 @@ public class SecurityConfiguration {
  * failureForwardUrl failureUrl
  * 「这两个方法在设置的时候也是设置一个即可」。
  * failureForwardUrl 是登录失败之后会发生服务端跳转，failureUrl 则在登录失败之后，会发生重定向。
+ */
+/**
+ * spring boot如果想在浏览器中直接访问html (localhost:8090/login.html) 在resources下新建public目录
+ * 否则的话必须通过视图渲染解析才能访问 也就是loginPage("/login.html") 404的原因
+ * spring boot默认首页会去访问static/index.html 所以不配置defaultSuccessUrl首页的话也不会报错 如果配置的话必须在Controller写接口 否则会报404
  */

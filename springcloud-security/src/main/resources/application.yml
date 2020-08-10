@@ -20,6 +20,7 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/ # 不加这个，接口自动到resources/templates目录下找与接口返回的相同名称的html
     cache: false
+    suffix: .html
 
 #eureka:
 #  client:

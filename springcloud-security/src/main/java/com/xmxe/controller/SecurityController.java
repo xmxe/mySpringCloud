@@ -42,6 +42,7 @@ public class SecurityController {
     }
 
     @GetMapping("/hello")
+    @ResponseBody
     public String hello() {
         return "hello";
     }
