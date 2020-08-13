@@ -26,6 +26,9 @@ public class SecurityConfiguration {
     @Autowired
     LoginService loginService; //https://zhuanlan.zhihu.com/p/67519928
 
+    @Autowired
+    FailureHandler failureHandler;
+
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> {
@@ -74,6 +77,7 @@ public class SecurityConfiguration {
                         //.usernameParameter("name")//不配置的话登陆表单参数必须为username
                         //.passwordParameter("passwd")//不配置的话登陆表单参数必须为password
                         //.failureForwardUrl("/error")
+                        .failureHandler(failureHandler)
                         .permitAll()//允许访问
                         .and()
                     .authorizeRequests()

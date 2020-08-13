@@ -34,9 +34,13 @@
                 <input type="submit" value="登陆" id="button-blue" />
                 <div class="ease"></div>
             </div>
-            <p style="color: red" th:if="${param.error}"
-               th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
+            <p style="color: red" th:if="${session.error}"
+               th:text="${session.error}">
             </p>
+           <!-- 不使用 SecurityConfiguration配置failureHandler
+           <p style="color: red" th:if="${param.error}"
+               th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
+            </p>-->
         </form>
     </div>
 </div>
