@@ -4,12 +4,14 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.xmxe</groupId>
-	<artifactId>cas_clientone</artifactId>
+	<artifactId>cas_client_one</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>cas_clientone</name>
-	<description>Spring Cloud project</description>
+	<name>cas_client_one</name>
+	<description>
+		搭建cas_server https://blog.csdn.net/oumuv/article/details/83377945
+	</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -24,7 +26,6 @@
 	</properties>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>net.unicon.cas</groupId>
 			<artifactId>cas-client-autoconfig-support</artifactId>
@@ -47,6 +48,10 @@
 			</exclusions>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

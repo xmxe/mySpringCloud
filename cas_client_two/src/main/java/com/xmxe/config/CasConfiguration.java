@@ -1,4 +1,4 @@
-package com.cas.config;
+package com.xmxe.config;
 
 import org.jasig.cas.client.authentication.AuthenticationFilter;
 import org.jasig.cas.client.session.SingleSignOutFilter;
@@ -119,7 +119,7 @@ public class CasConfiguration {
     public ServletListenerRegistrationBean<EventListener> singleSignOutListenerRegistration() {
         ServletListenerRegistrationBean<EventListener> registrationBean = new ServletListenerRegistrationBean<>();
         registrationBean.setListener(new SingleSignOutHttpSessionListener());
-        registrationBean.setOrder(1);
+        registrationBean.setOrder(2);
         return registrationBean;
     }
 

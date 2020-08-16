@@ -21,8 +21,8 @@
 		<module>springcloud-zuul</module>
 		<module>springcloud-security</module>
 		<!-- spring boot cas单点登陆 -->
-		<module>cas_clientone</module>
-		<module>cas_clienttwo</module>
+		<module>cas_security_client_one</module>
+		<module>cas_client_two</module>
     </modules>
 
 	<description>Spring Cloud project</description>

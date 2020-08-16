@@ -1,4 +1,4 @@
-package com.cas;
+package com.xmxe;
 
 import net.unicon.cas.client.configuration.EnableCasClient;
 import org.springframework.boot.SpringApplication;

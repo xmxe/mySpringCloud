@@ -1,4 +1,4 @@
-package com.cas.config;
+package com.xmxe.config;
 
 import org.jasig.cas.client.authentication.AuthenticationFilter;
 import org.jasig.cas.client.session.SingleSignOutFilter;

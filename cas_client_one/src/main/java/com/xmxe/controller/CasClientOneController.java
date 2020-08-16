@@ -1,4 +1,4 @@
-package com.cas.controller;
+package com.xmxe.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ public class CasClientOneController {
     @RequestMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:http://192.168.236.131:8080/cas/logout?service=http://127.0.0.1:9100/index";
+        return "redirect:http://192.168.236.131:9100/cas/logout?service=http://127.0.0.1:9101/index";
     }
     @RequestMapping("/index")
     @ResponseBody
@@ -25,3 +25,4 @@ public class CasClientOneController {
         return "退出成功";
     }
 }
+
