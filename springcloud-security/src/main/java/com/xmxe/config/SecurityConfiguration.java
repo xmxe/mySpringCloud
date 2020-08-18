@@ -1,7 +1,6 @@
 package com.xmxe.config;
 
-import com.xmxe.entity.User;
-import com.xmxe.service.LoginService;
+import com.xmxe.service.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,59 +10,25 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+//https://zhuanlan.zhihu.com/p/67519928
 
     @Autowired
-    LoginService loginService; //https://zhuanlan.zhihu.com/p/67519928
+    MyUserDetailService myUserDetailService;
 
     @Autowired
     FailureHandler failureHandler;
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        return username -> {
-            List<User> users = loginService.getUserByUsername(username);
-            if (users == null || users.size() == 0) {
-                throw new UsernameNotFoundException("用户名未找到");
-            }
-            String password = users.get(0).getPassword();
-//            PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//            String passwordAfterEncoder = passwordEncoder.encode(password);//对用户密码进行加密
-//            System.out.println(username + "/" + passwordAfterEncoder);
-
-            List<String> roles = loginService.getRoleByUsername(username);
-            List<String> permissions = loginService.getPermissionsByUsername(username);
-
-            String[] permissionArr = new String[roles.size() + permissions.size()];
-            int permissionArrIndex = 0;
-            for (String role : roles) {
-                permissionArr[permissionArrIndex] = "ROLE_" + role;
-                permissionArrIndex++;
-            }
-            for (String permission : permissions) {
-                permissionArr[permissionArrIndex] = permission;
-                permissionArrIndex++;
-            }
-            System.out.println("UserDetailsService中的permissionArr============" + Arrays.toString(permissionArr));
-            return org.springframework.security.core.userdetails.User.withUsername(username).password(password).authorities(permissionArr).build();
-        };
-    }
-
-    @Bean
     public WebSecurityConfigurerAdapter webSecurityConfigurerAdapter() {
         return new WebSecurityConfigurerAdapter() {
             @Override
-            public void configure(WebSecurity web) throws Exception {
+            public void configure(WebSecurity web) {
                 web.ignoring().antMatchers("/js/**", "/css/**", "/images/**","/**/favicon.*");
             }
 
@@ -79,6 +44,12 @@ public class SecurityConfiguration {
                         //.failureForwardUrl("/error")
                         .failureHandler(failureHandler)
                         .permitAll()//允许访问
+                        .and()
+                    .rememberMe()
+                        .rememberMeParameter("remember-me")
+                        .userDetailsService(myUserDetailService)
+                        .tokenValiditySeconds(60)//机组我的时间 (秒)
+//                        .tokenRepository(persistentTokenRepository()) // 设置数据访问层
                         .and()
                     .authorizeRequests()
                         .antMatchers("/guest/**","/error","/login").permitAll()// /guest/**的接口会被允许所有人访问，包括未登录的人。
@@ -130,13 +101,24 @@ public class SecurityConfiguration {
         return hierarchy;
     }
 
+    /**
+     * 持久化token
+     * Security中，默认是使用PersistentTokenRepository的子类InMemoryTokenRepositoryImpl，将token放在内存中
+     * 如果使用JdbcTokenRepositoryImpl，会创建表persistent_logins，将token持久化到数据库
+     */
+ /*   @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+        tokenRepository.setDataSource(dataSource); // 设置数据源
+//        tokenRepository.setCreateTableOnStartup(true); // 启动创建表，创建成功后注释掉
+        return tokenRepository;
+    }*/
 }
 
 
 /**
  * 在 Spring Security 中，和登录成功重定向 URL 相关的方法有两个
  * defaultSuccessUrl successForwardUrl
- * <p>
  * defaultSuccessUrl 有一个重载的方法，我们先说一个参数的 defaultSuccessUrl 方法。
  * 如果我们在 defaultSuccessUrl 中指定登录成功的跳转页面为 /index，此时分两种情况，
  * 如果你是直接在浏览器中输入的登录地址，登录成功后，就直接跳转到 /index，
@@ -144,23 +126,17 @@ public class SecurityConfiguration {
  * 此时登录成功后，就不会来到 /index ，而是来到 /hello 页面。
  * defaultSuccessUrl 还有一个重载的方法，第二个参数如果不设置默认为 false，也就是我们上面的的情况，
  * 如果手动设置第二个参数为 true，则 defaultSuccessUrl 的效果和 successForwardUrl 一致。
- * <p>
  * successForwardUrl 表示不管你是从哪里来的，登录后一律跳转到 successForwardUrl 指定的地址。
  * 例如 successForwardUrl 指定的地址为 /index ，你在浏览器地址栏输入 http://localhost:8080/hello，
  * 结果因为没有登录，重定向到登录页面，当你登录成功之后，就会服务端跳转到 /index 页面；
  * 或者你直接就在浏览器输入了登录页面地址，登录成功后也是来到 /index。
- * <p>
+ *
  * 与登录成功相似，登录失败也是有两个方法：
  * failureForwardUrl failureUrl
  * 「这两个方法在设置的时候也是设置一个即可」。
  * failureForwardUrl 是登录失败之后会发生服务端跳转，failureUrl 则在登录失败之后，会发生重定向。
  */
-/**
- * 与登录成功相似，登录失败也是有两个方法：
- * failureForwardUrl failureUrl
- * 「这两个方法在设置的时候也是设置一个即可」。
- * failureForwardUrl 是登录失败之后会发生服务端跳转，failureUrl 则在登录失败之后，会发生重定向。
- */
+
 /**
  * spring boot如果想在浏览器中直接访问html (localhost:8090/login.html) 在resources下新建public目录
  * 否则的话必须通过视图渲染解析才能访问 也就是loginPage("/login.html") 404的原因
