@@ -8,13 +8,16 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * 实现一个前置过滤器：拦截请求，必须带参数name过来，不然抛出提示信息等等
+ */
 @Component
-public class MyZuulFilter extends ZuulFilter {
+public class ZuulApiGatewayPreFilter extends ZuulFilter {
 
-    private static Logger log = LogManager.getLogger(MyZuulFilter.class);
+    private static Logger log = LogManager.getLogger(ZuulApiGatewayPreFilter.class);
     @Override
     public String filterType() {
-        return "pre";//pre：路由之前 routing：路由之时post： 路由之后 error：发送错误调用
+        return "pre";//pre:路由之前 routing:路由之时 post:路由之后 error:发送错误调用
     }
 
     @Override

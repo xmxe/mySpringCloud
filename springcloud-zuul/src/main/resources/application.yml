@@ -19,6 +19,12 @@ zuul:
     bd:
       path: /bd/**
       url : https://www.baidu.com
+  host:
+    connect-timeout-millis: 15000 #连接超时时间
+    socket-timeout-millis: 60000 #socket发送超时时间
+
+
+#  prefix: /api-gateway Zuul配置访问前缀：访问时候需要加上前缀，eg：http://localhost:8089/api-gateway/api-a/hello_ribbon?name=a
 
 management:
   endpoints:
