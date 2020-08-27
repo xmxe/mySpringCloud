@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.xmxe</groupId>
-	<artifactId>springcloud-zuul</artifactId>
+	<artifactId>springcloud-netflix-zuul</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>springcloud-zuul</name>
-	<description>springcloud-zuul project</description>
+	<name>springcloud-netflix-zuul</name>
+	<description>springcloud-netflix-zuul project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

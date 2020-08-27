@@ -18,7 +18,7 @@
 		<module>springcloud-gateway</module>
 		<module>springcloud-hystrix</module>
 		<module>springcloud-provider</module>
-		<module>springcloud-zuul</module>
+		<module>springcloud-netflix-zuul</module>
 		<module>springcloud-security</module>
 
     </modules>
