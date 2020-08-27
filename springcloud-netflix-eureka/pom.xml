@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.xmxe</groupId>
-	<artifactId>springcloud-eureka</artifactId>
+	<artifactId>springcloud-netflix-eureka</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>springcloud-eureka</name>
-	<description>springcloud-eureka project</description>
+	<name>springcloud-netflix-eureka</name>
+	<description>springcloud-netflix-eureka project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
