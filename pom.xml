@@ -13,7 +13,7 @@
 		<module>springcloud-config-server</module>
 		<module>springcloud-config-client</module>
 		<module>springcloud-config-client2</module>
-		<module>springcloud-ribbon</module>
+		<module>springcloud-netflix-ribbon</module>
 		<module>springcloud-feign</module>
 		<module>springcloud-gateway</module>
 		<module>springcloud-hystrix</module>
