@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.xmxe</groupId>
-	<artifactId>springcloud-feign</artifactId>
+	<artifactId>springcloud-openfeign</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>springcloud-feign</name>
-	<description>springcloud-feign project</description>
+	<name>springcloud-openfeign</name>
+	<description>springcloud-openfeign project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
