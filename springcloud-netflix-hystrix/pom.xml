@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.xmxe</groupId>
-	<artifactId>springcloud-hystrix</artifactId>
+	<artifactId>springcloud-netflix-hystrix</artifactId>
 	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>springcloud-hystrix</name>
-	<description>springcloud-hystrix project</description>
+	<name>springcloud-netflix-hystrix</name>
+	<description>springcloud-netflix-hystrix project</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
