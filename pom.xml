@@ -20,7 +20,10 @@
 		<module>springcloud-provider</module>
 		<module>springcloud-netflix-zuul</module>
 		<module>springcloud-security</module>
-
+		<module>springcloud-alibaba-nacos-config</module>
+		<module>springcloud-alibaba-nacos-service-provider</module>
+		<module>springcloud-alibaba-nacos-service-consumer</module>
+		<module>springcloud-alibaba-sentinel</module>
     </modules>
 
 	<description>Spring Cloud project</description>
