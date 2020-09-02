@@ -1,5 +1,6 @@
 package com.xmxe.config;
 
+import com.xmxe.entity.CustomizeSessionInformationExpiredStrategy;
 import com.xmxe.service.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
 @EnableWebSecurity
@@ -23,6 +25,9 @@ public class SecurityConfiguration {
 
     @Autowired
     FailureHandler failureHandler;
+
+    @Autowired
+    CustomizeSessionInformationExpiredStrategy sessionInformationExpiredStrategy;
 
     @Bean
     public WebSecurityConfigurerAdapter webSecurityConfigurerAdapter() {
@@ -45,11 +50,18 @@ public class SecurityConfiguration {
                         .failureHandler(failureHandler)
                         .permitAll()//允许访问
                         .and()
+                    .sessionManagement()
+                        .maximumSessions(1)//相同用户只允许登陆1个
+                        //.maxSessionsPreventsLogin(true)//相同用户登陆后不允许在登陆
+                        .expiredSessionStrategy(sessionInformationExpiredStrategy)//自定义session过期策略
+                        .and()
+                       // .invalidSessionUrl("/login")
+                        .and()
                     .rememberMe()
                         .rememberMeParameter("remember-me")
                         .userDetailsService(myUserDetailService)
                         .tokenValiditySeconds(60)//机组我的时间 (秒)
-//                        .tokenRepository(persistentTokenRepository()) // 设置数据访问层
+                        //.tokenRepository(persistentTokenRepository()) // 设置数据访问层
                         .and()
                     .authorizeRequests()
                         .antMatchers("/guest/**","/error","/login").permitAll()// /guest/**的接口会被允许所有人访问，包括未登录的人。
@@ -100,7 +112,11 @@ public class SecurityConfiguration {
         hierarchy.setHierarchy("ROLE_adminRole > ROLE_guestRole");
         return hierarchy;
     }
-
+    //防止注销登录后无法继续登陆
+    @Bean
+    HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
     /**
      * 持久化token
      * Security中，默认是使用PersistentTokenRepository的子类InMemoryTokenRepositoryImpl，将token放在内存中
