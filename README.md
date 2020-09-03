@@ -16,7 +16,7 @@
 1.spring.cloud.config.discovery.enabled ：开启Config服务发现支持
 2.spring.cloud.config.discovery.serviceId ：指定server端的name,也就是server端spring.application.name的值
 3.eureka.client.serviceUrl.defaultZone ：指向注册中心的地址
-通过config server集成spring-cloud-starter-bus-kafka 在远程修改配置文件的时候通过http://config-server:port/actuator/bus-refresh 来刷新所有springcloud-config-client，无须重启springcloud-config-client,也无须在springcloud-config-client上一个一个单独通过http://configclientID:port/actuator/refresh来刷新config-client的数据,借助Git仓库的WebHook，我们就可轻松实现配置的自动刷新
+通过config server集成spring-cloud-starter-bus-kafka 在远程修改配置文件的时候通过http://config-server:port/actuator/bus-refresh 来刷新所有springcloud-config-client，无须重启springcloud-config-client,也无须在springcloud-config-client上一个一个单独通过http://configclientID:port/actuator/refresh 来刷新config-client的数据,借助Git仓库的WebHook，我们就可轻松实现配置的自动刷新
 
 --------
 
