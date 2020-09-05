@@ -1,6 +1,5 @@
 package com.xmxe.config;
 
-import com.xmxe.entity.CustomizeSessionInformationExpiredStrategy;
 import com.xmxe.service.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,10 +14,10 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
+//https://zhuanlan.zhihu.com/p/67519928
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-//https://zhuanlan.zhihu.com/p/67519928
 
     @Autowired
     MyUserDetailService myUserDetailService;
@@ -47,7 +46,7 @@ public class SecurityConfiguration {
                         //.usernameParameter("name")//不配置的话登陆表单参数必须为username
                         //.passwordParameter("passwd")//不配置的话登陆表单参数必须为password
                         //.failureForwardUrl("/error")
-                        .failureHandler(failureHandler)
+                        .failureHandler(failureHandler)//登陆失败时将自定义信息写入session
                         .permitAll()//允许访问
                         .and()
                     .sessionManagement()
@@ -60,7 +59,7 @@ public class SecurityConfiguration {
                     .rememberMe()
                         .rememberMeParameter("remember-me")
                         .userDetailsService(myUserDetailService)
-                        .tokenValiditySeconds(60)//机组我的时间 (秒)
+                        .tokenValiditySeconds(60)//记住我的时间 (秒)
                         //.tokenRepository(persistentTokenRepository()) // 设置数据访问层
                         .and()
                     .authorizeRequests()
@@ -74,7 +73,7 @@ public class SecurityConfiguration {
                         .anyRequest().authenticated().
                         and()
                     .logout()
-                        .logoutUrl("/logout")
+                        .logoutUrl("/logout_1")//spring security设置logout_1为系统退出的url 当监测到这个请求url时使用spring security处理登出逻辑 请求方式默认使用post a标签方式为get 可以在spring mvc中处理登出逻辑 但是这样的话就和spring security没关系了
                         //.logoutRequestMatcher(new AntPathRequestMatcher("/logout","POST"))//自定义请求方式
                         .logoutSuccessUrl("/login")//注销成功后要跳转的页面。
                         .deleteCookies()//用来清除 cookie
@@ -112,7 +111,7 @@ public class SecurityConfiguration {
         hierarchy.setHierarchy("ROLE_adminRole > ROLE_guestRole");
         return hierarchy;
     }
-    //防止注销登录后无法继续登陆
+    //防止当设置成相同用户登陆后不允许在登陆时第一个用户注销登录后无法继续登陆
     @Bean
     HttpSessionEventPublisher httpSessionEventPublisher() {
         return new HttpSessionEventPublisher();

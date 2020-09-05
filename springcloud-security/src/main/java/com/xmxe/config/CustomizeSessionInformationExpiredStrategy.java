@@ -1,4 +1,4 @@
-package com.xmxe.entity;
+package com.xmxe.config;
 
 import org.springframework.security.web.session.SessionInformationExpiredEvent;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;

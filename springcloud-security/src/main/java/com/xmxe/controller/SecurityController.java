@@ -20,26 +20,6 @@ public class SecurityController {
     public String login() {
         return "login";
     }
-   /* @PostMapping("/doLogin")
-    public String doLogin(String username,String password) {
-        System.out.println(username+"------------"+password);
-        return "index";
-    }*/
-
-    /*@GetMapping("/index")
-    public String index() {
-        return "index";
-    }*/
-
-    /*@GetMapping("/error")
-    public String loginFailed() {
-        return "error";
-    }*/
-
-    @GetMapping("/logout")
-    public String logout() {
-        return "login";
-    }
 
     @GetMapping("/hello")
     @ResponseBody
