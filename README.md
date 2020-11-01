@@ -25,14 +25,12 @@ config server集成spring-cloud-starter-bus-kafka和spring-boot-starter-actuator
 借助Git仓库的WebHook，我们就可轻松实现配置的自动刷新
 ```
 
-
 --------
 
 #### 相关文章
 
 - [一份微服务架构手稿图，彻底搞定微服务核心原理！](https://mp.weixin.qq.com/s/c3fQsf7oNOk9xfA95CtKHw)
-
 - [1.5W 字搞懂 Spring Cloud，太牛了！](https://mp.weixin.qq.com/s/EHPKm50KmHq_KZIHyVef3A)
-
 - [基于SpringBoot2.x搭建一个高可用的注册中心(Eureka)](https://mp.weixin.qq.com/s/9PYHN7qRA3YF65Fr8mYn4Q)
+- [SpringCloud常见面试题（2020最新版）](https://mp.weixin.qq.com/s/AHx8ObXStSOZteCMV8i-Nw)
 
