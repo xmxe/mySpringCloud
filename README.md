@@ -1,14 +1,15 @@
 ## Spring Cloud 与Spring Boot版本对比
 
-| Spring Cloud             | Spring Boot                                    |
-| ------------------------ | ---------------------------------------------- |
-| Angel版本                | 兼容Spring Boot 1.2.x                          |
-| Brixton版本              | 兼容Spring Boot 1.3.x，也兼容Spring Boot 1.4.x |
-| Camden版本               | 兼容Spring Boot 1.4.x，也兼容Spring Boot 1.5.x |
-| Dalston版本、Edgware版本 | 兼容Spring Boot 1.5.x，不兼容Spring Boot 2.0.x |
-| Finchley版本             | 兼容Spring Boot 2.0.x，不兼容Spring Boot 1.5.x |
-| Greenwich版本            | 兼容Spring Boot 2.1.x                          |
-| Hoxton版本               | 兼容Spring Boot 2.2.x                          |
+| Spring Cloud     | Spring Boot                                    |
+| ---------------- | ---------------------------------------------- |
+| Angel            | 兼容Spring Boot 1.2.x                          |
+| Brixton          | 兼容Spring Boot 1.3.x，也兼容Spring Boot 1.4.x |
+| Camden           | 兼容Spring Boot 1.4.x，也兼容Spring Boot 1.5.x |
+| Dalston、Edgware | 兼容Spring Boot 1.5.x，不兼容Spring Boot 2.0.x |
+| Finchley         | 兼容Spring Boot 2.0.x，不兼容Spring Boot 1.5.x |
+| Greenwich        | 兼容Spring Boot 2.1.x                          |
+| Hoxton           | 兼容Spring Boot 2.2.x                          |
+| 2020.0.0         | 兼容Spring Boot 2.3.x                          |
 
 ------
 #### 笔记
@@ -33,4 +34,5 @@ config server集成spring-cloud-starter-bus-kafka和spring-boot-starter-actuator
 - [1.5W 字搞懂 Spring Cloud，太牛了！](https://mp.weixin.qq.com/s/EHPKm50KmHq_KZIHyVef3A)
 - [基于SpringBoot2.x搭建一个高可用的注册中心(Eureka)](https://mp.weixin.qq.com/s/9PYHN7qRA3YF65Fr8mYn4Q)
 - [SpringCloud常见面试题（2020最新版）](https://mp.weixin.qq.com/s/AHx8ObXStSOZteCMV8i-Nw)
+- [把 Spring Cloud 给拆了！详解每个组件的作用](https://mp.weixin.qq.com/s/hi0jgVmqoG_ya7xFFwpxAw)
 
