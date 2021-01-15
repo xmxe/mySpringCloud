@@ -35,4 +35,4 @@ config server集成spring-cloud-starter-bus-kafka和spring-boot-starter-actuator
 - [基于SpringBoot2.x搭建一个高可用的注册中心(Eureka)](https://mp.weixin.qq.com/s/9PYHN7qRA3YF65Fr8mYn4Q)
 - [SpringCloud常见面试题（2020最新版）](https://mp.weixin.qq.com/s/AHx8ObXStSOZteCMV8i-Nw)
 - [把 Spring Cloud 给拆了！详解每个组件的作用](https://mp.weixin.qq.com/s/hi0jgVmqoG_ya7xFFwpxAw)
-
+- [SpringCloud微服务架构中分布式事务解决方案](https://mp.weixin.qq.com/s/3i1QA5th4C9GRw17jlovxQ)
