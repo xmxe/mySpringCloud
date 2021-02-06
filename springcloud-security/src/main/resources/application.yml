@@ -3,13 +3,7 @@ server:
 
 spring:
   application:
-    name: springcloud-security
-
-  devtools:
-    restart:
-      #exclude: templates/**,static/** #不重启
-      #additional-paths: src/main/java  #重启
-      enabled: false #都不重启
+    name: security_service
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -22,10 +16,10 @@ spring:
     cache: false
     suffix: .html
 
-#eureka:
-#  client:
-#    serviceUrl:
-#      defaultZone: http://localhost:8080/eureka/
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka/
 
 
 

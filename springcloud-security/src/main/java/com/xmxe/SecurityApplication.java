@@ -2,8 +2,9 @@ package com.xmxe;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 @SpringBootApplication
 public class SecurityApplication {
 
@@ -11,8 +12,8 @@ public class SecurityApplication {
 
 		SpringApplication.run(SecurityApplication.class, args);
 
-		//测试spring security密码加密
-//		testPasswordEncoder();
+		// 测试spring security密码加密
+		// testPasswordEncoder();
 	}
 
 	/*public static void testPasswordEncoder(){
