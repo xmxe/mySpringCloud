@@ -3,48 +3,77 @@ server:
 
 spring:
   application:
-    name: gateway_Service
+    name: gateway_service
 
   cloud:
     gateway:
+#      default-filters: #对所有请求添加过滤器
+#        - AddResponseHeader=X-Response-Default-Red, Default-Blue
+#        - PrefixPath=/httpbin
       routes:
-      - id: 163 #随便起 但要求唯一
-        uri: http://www.163.com/
-        predicates:
+      - id: 163 #自定义的路由 ID，保持唯一
+        uri: http://www.163.com/ #目标服务地址
+        predicates: #路由条件
           - Path=/163/**
-#        - Host=**.foo.org
-#        - Method=GET
-#        - Header=X-Request-Id, \d+
-#        - Query=foo, ba. #根据请求参数键值对
-#        - Query=baz #根据请求参数属性名
-#        - Cookie=chocolate, ch.p #根据cookie转发
-#        - After=2018-01-20T06:06:06+08:00[Asia/Shanghai] #根据时间确定是否路由 与之相反的是Before 还有Between 两个时间内进行转发
-#        - RemoteAddr=192.168.1.1/24 #通过ip路由
+#          - Host=**.foo.org
+#          - Method=GET
+#          - Header=X-Request-Id, \d+ #携带参数X-Request-Id或者满足\d+的请求头才会匹配
+#          - Query=foo, ba. #根据请求参数键值对
+#          - Query=baz #根据请求参数属性名
+#          - Cookie=chocolate, ch.p #根据cookie转发
+#          - After=2018-01-20T06:06:06+08:00[Asia/Shanghai] #根据时间确定是否路由,与之相反的是Before,还有Between两个时间内进行转发
+#          - Before=2017-01-20T17:42:47.789-07:00[America/Denver]
+#          - Between=2017-01-20T17:42:47.789-07:00[America/Denver],2017-01-21T17:42:47.789-07:00[America/Denver]
+#          - RemoteAddr=192.168.1.1/24 #通过ip路由
 
-      - id: test
+      - id: providerService
         uri: lb://providerService #lb=load balance负载均衡 内部使用ribbon实现
         predicates:
-          - Path=/abc/**   #http://localhost:8087/abc/hello_ribbon?name=a 访问providerService服务
+          - Path=/abc/**   #http://localhost:8087/abc/hello_ribbon?name=a 访问provider_service服务
         filters:
-            - StripPrefix=1  # 去除请求地址中的前一个后缀
-#            - PrefixPath=/mypath  #StripPrefix 正相反，是在 URL 路径前面添加前缀
-#            - name : RequestRateLimiter  #限流的name必须是RequestRateLimiter
-#              nama : Hystrix     #xmxe 熔断路由器
-#              name: Retry        #重试路由器
+            - StripPrefix=1  # 访问/abc/def/gh会直接访问/def/gh 如果设置=2的话直接访问/gh
+            - Auth #自定义局部过滤器 需要写在配置文件里
+            - name: IPForbid
+              args:
+                forbidIp: 0:0:0:0:0:0:0:1
+#            - PrefixPath=/mypath  #对所有的请求路径添加前缀 访问http://localhost:8087/mypath/**
+#            - RedirectTo=302, https://acme.org #重定向，配置包含重定向的返回码和地址
+#            - RemoveRequestHeader=X-Request-Foo #去掉某个请求头信息
+#            - RemoveResponseHeader=X-Request-Foo #去掉某个回执头信息
+#            - RemoveRequestParameter=red #去掉某个请求参数信息 #改写路径
+#            - SetPath=/{segment} #设置请求路径，与RewritePath类似
+#            - SetRequestHeader=X-Request-Red, Blue #设置请求头信息
+#            - AddRequestHeader=X-Request-Foo, Bar
+#            - SetStatus=401 #设置回执状态码。
+#            - RewritePath=/where(?<segment>/?.*), /test(?<segment>/?.*) #路径重写后转发
+#            - name: RequestSize #请求大小
 #              args:
-#                redis-rate-limiter.replenishRate: 10  #允许用户每秒处理多少个请求
-#                redis-rate-limiter.burstCapacity: 20  #令牌桶的容量，允许在一秒钟内完成的最大请求数
-#                key-resolver: "#{@ipKeyResolver}"  #使用 SpEL 按名称引用 bean
-#                name: fallbackcmd
+#                maxSize: 5000000
+#            - name: RequestRateLimiter #限流的name必须是RequestRateLimiter
+#              args:
+#                redis-rate-limiter.replenishRate: 10  #令牌桶每秒填充平均速率。
+#                redis-rate-limiter.burstCapacity: 20  #令牌桶总容量。
+#                key-resolver: "#{@ipKeyResolver}"  #使用于限流的键的解析器的 Bean 对象的名字。它使用 SpEL 表达式根据#{@beanName}从 Spring 容器中获取 Bean 对象。这里的bean配置在GateWayConfig.java中
+#            - name: Hystrix
+#              args:
+#                name: fallbackCmd
 #                fallbackUri: forward:/incaseoffailureusethis
+#            - name: Retry
+#              args:
 #                retries: 3  #重试次数，默认值是 3 次
 #                statuses: BAD_GATEWAY  #HTTP 的状态返回码 取值请参考：org.springframework.http.HttpStatus
-#                methods：指定哪些方法的请求需要进行重试逻辑，默认值是 GET 方法，取值参考：org.springframework.http.HttpMethod
-#                series：一些列的状态码配置，取值参考：org.springframework.http.HttpStatus.Series。符合的某段状态码才会进行重试逻辑，默认值是 SERVER_ERROR，值是 5，也就是 5XX(5 开头的状态码)，共有5 个值。
-      discovery:
+#                methods: #指定哪些方法的请求需要进行重试逻辑，默认值是 GET 方法，取值参考：org.springframework.http.HttpMethod
+#                series: #一些列的状态码配置，取值参考：org.springframework.http.HttpStatus.Series。符合的某段状态码才会进行重试逻辑，默认值是 SERVER_ERROR，值是 5，也就是 5XX(5 开头的状态码)，共有5 个值。
+
+      discovery: #设置负载均衡
         locator:
-          enabled: true  #获取服务名
+          enabled: true
           lower-case-service-id: true #设置服务名小写，默认false 服务名大写
+
+#  redis:
+#    host: localhost
+#    port: 6379
+#    database: 0
 
 eureka:
   client:
