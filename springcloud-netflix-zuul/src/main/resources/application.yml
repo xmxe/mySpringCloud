@@ -3,22 +3,16 @@ server:
 
 spring:
   application:
-    name: zuul_Service
-
-  devtools:
-    restart:
-      #exclude: templates/**,static/** #不重启
-      #additional-paths: src/main/java  #重启
-      enabled: false #都不重启
+    name: zuul-service
 
 zuul:
   routes:
     api-a:
       path: /api-a/**
-      serviceId: providerService #http://localhost:8089/api-a/hello_ribbon?name=a
-    bd:
-      path: /bd/**
-      url : https://www.baidu.com
+      serviceId: provider-service #http://localhost:8089/api-a/hello_ribbon?name=a
+    netease:
+      path: /163/**
+      url : https://www.163.com/
   host:
     connect-timeout-millis: 15000 #连接超时时间
     socket-timeout-millis: 60000 #socket发送超时时间

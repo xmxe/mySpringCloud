@@ -4,8 +4,7 @@ import com.google.common.io.CharStreams;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
@@ -18,8 +17,8 @@ import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
  * 路由过滤器执行之后，执行后置过滤器打印日志
  */
 @Component
+@Slf4j
 public class ZuulApiGatewayPostFilter extends ZuulFilter {
-    private static Logger log = LogManager.getLogger(ZuulApiGatewayPostFilter.class);
 
     @Override
     public String filterType() {
