@@ -52,10 +52,29 @@ public class FeiginConfig implements RequestInterceptor {
         }
     }
 
-   /*这个类主要提供了一些方法允许自定义线程隔离的一些配置
-    *但是不知问题原因导致feign传过去的参数多了 可能是线程复用的问题
-   @Bean
+   /**
+    * 这个类主要提供了一些方法允许自定义线程隔离的一些配置
+    * 但是不知问题原因导致feign传过去的参数多了 可能是线程复用的问题
+    */
+   /*@Bean
     public FeignHystrixConcurrencyStrategy feignHystrixConcurrencyStrategy() {
         return new FeignHystrixConcurrencyStrategy();
     }*/
+
+    /**
+     * 自定义Decoder
+     */
+    /*@Bean
+    @ConditionalOnMissingBean
+    public Decoder feignDecoder(){
+        return (response,type) -> "decode response="+response+", type="+type;
+
+        *//*return new Decoder() {
+            @Override
+            public Object decode(Response response, Type type) throws IOException, DecodeException, FeignException {
+                return new ResponseEntityDecoder(new SpringDecoder(feignHttpMessageConverter()));
+            }
+        };*//*
+    }*/
+
 }
