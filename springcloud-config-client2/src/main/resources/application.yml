@@ -3,13 +3,7 @@ server:
 
 spring:
   application:
-    name: configClient2_Service
-
-  devtools:
-    restart:
-      #exclude: templates/**,static/** #不重启
-      #additional-paths: src/main/java  #重启
-      enabled: false #都不重启
+    name: config-client2-service
 
 management:
   endpoints:

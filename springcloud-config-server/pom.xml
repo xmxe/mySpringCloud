@@ -55,12 +55,6 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<optional>true</optional>
-		</dependency>
-
 		<!-- post请求http://localhost:8081/actuator/bus-refresh刷新所有-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
