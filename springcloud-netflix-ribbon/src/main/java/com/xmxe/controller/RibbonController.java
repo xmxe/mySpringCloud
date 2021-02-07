@@ -15,9 +15,9 @@ public class RibbonController {
 	//访问此接口调用其他注册的微服务
     @RequestMapping("/ribbon")
     @ResponseBody
-    public String hi(@RequestParam String name){
+    public String ribbon(@RequestParam String name){
         //ribbon不支持下划线
-        String url = "http://providerService/hello_ribbon?name="+name;
+        String url = "http://provider-service/hello_ribbon?name="+name;
         return restTemplate.getForObject(url, String.class);
     }
 }
