@@ -3,13 +3,8 @@ server:
 
 spring:
   application:
-    name: hystrix_Service
+    name: hystrix-service
 
-  devtools:
-    restart:
-      #exclude: templates/**,static/** #不重启
-      #additional-paths: src/main/java  #重启
-      enabled: false #都不重启
   redis:
     host: 192.168.236.132
     port: 6379
