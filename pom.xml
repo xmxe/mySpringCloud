@@ -25,6 +25,8 @@
 		<module>springcloud-alibaba-nacos-service-provider</module>
 		<module>springcloud-alibaba-nacos-service-consumer</module>
 		<module>springcloud-alibaba-sentinel</module>
+		<module>springcloud-admin-server</module>
+		<module>springcloud-admin-client</module>
     </modules>
 
 	<properties>
