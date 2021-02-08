@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
 //@EnableDiscoveryClient //适用于其他的注册中心，场景较丰富
@@ -19,7 +20,11 @@ public class RibbonApplication {
 	@Bean
 	@LoadBalanced//开启负载均衡
 	RestTemplate restTemplate(){
-		return new RestTemplate();
+		SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
+		requestFactory.setConnectTimeout(2500);// 设置超时
+		requestFactory.setReadTimeout(2000);
+		RestTemplate restTemplate = new RestTemplate(requestFactory);
+		return restTemplate;
 	}
 }
 
