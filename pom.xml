@@ -27,6 +27,8 @@
 		<module>springcloud-alibaba-sentinel</module>
 		<module>springcloud-admin-server</module>
 		<module>springcloud-admin-client</module>
+		<module>springcloud-consul-provider</module>
+		<module>springcloud-consul-consumer</module>
     </modules>
 
 	<properties>

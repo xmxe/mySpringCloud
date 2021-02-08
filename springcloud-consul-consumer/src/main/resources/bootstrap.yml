@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    consul:
+      host: 192.168.236.133  #consul的IP（可以改成自己电脑ip）
+      port: 8500       #consul启动端口默认8500
+      discovery:
+        register: false #不进行注册
+      config:
+        enabled: true # 默认true
+        format: YAML    # 表示consul上面文件的格式 有四种 YAML PROPERTIES KEY-VALUE FILES
+        data-key: data   #表示consul上面的KEY值(或者说文件的名字) 默认是data
+        #prefix: config #设置配置值的基本文件夹 ,默认为 config
+        #defaultContext 设置所有应用程序使用的文件夹名称,默认为applications
+        profileSeparator: '::'  #设置用于使用配置文件在属性源中分隔配置文件名称的分隔符的值，默认为","，可修改为"::"
+
+#cosul创建远程配置时 key填入 config/consul-consumer-service::dev/data。config对应spring.cloud.consul.config.prefix属性，
+#consul-consumer-service对应spring.application.name属性,::对应spring.cloud.consul.config.profileSeparator属性,
+#dev对应spring.profiles.active属性,data对应spring.cloud.consul.config.data-key属性
