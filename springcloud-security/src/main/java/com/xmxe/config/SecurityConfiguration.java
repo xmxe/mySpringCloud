@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 //https://zhuanlan.zhihu.com/p/67519928
+// spring security + jwt :https://mp.weixin.qq.com/s/dk8CW5uvMPD-KE7ruaqwmA
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
