@@ -8,8 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 自定义session过期策略
+ */
 @Component
-public class CustomizeSessionInformationExpiredStrategy implements SessionInformationExpiredStrategy {
+public class CustomSessionExpiredStrategy implements SessionInformationExpiredStrategy {
     @Override
     public void onExpiredSessionDetected(SessionInformationExpiredEvent sessionInformationExpiredEvent) throws IOException, ServletException {
         HttpServletResponse response = sessionInformationExpiredEvent.getResponse();

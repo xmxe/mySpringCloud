@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 登陆失败处理handler
+ */
 @Component
 public class FailureHandler extends SimpleUrlAuthenticationFailureHandler {
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
@@ -20,6 +23,8 @@ public class FailureHandler extends SimpleUrlAuthenticationFailureHandler {
         //自定义session里面的内容信息
         request.getSession().setAttribute("error",exception.getMessage());
         this.redirectStrategy.sendRedirect(request, response, "login");
+
+//        super.onAuthenticationFailure(request, response, exception);
 
     }
 }

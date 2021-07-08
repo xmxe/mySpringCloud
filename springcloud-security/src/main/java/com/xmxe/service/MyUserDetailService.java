@@ -16,8 +16,8 @@ public class MyUserDetailService implements UserDetailsService {
     LoginService loginService;
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        List<User> users = loginService.getUserByUsername(s);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        List<User> users = loginService.getUserByUsername(username);
         if (users == null || users.size() == 0) {
             throw new UsernameNotFoundException("用户名未找到");
         }
@@ -26,8 +26,8 @@ public class MyUserDetailService implements UserDetailsService {
 //            String passwordAfterEncoder = passwordEncoder.encode(password);//对用户密码进行加密
 //            System.out.println(username + "/" + passwordAfterEncoder);
 
-        List<String> roles = loginService.getRoleByUsername(s);
-        List<String> permissions = loginService.getPermissionsByUsername(s);
+        List<String> roles = loginService.getRoleByUsername(username);
+        List<String> permissions = loginService.getPermissionsByUsername(username);
 
         String[] permissionArr = new String[roles.size() + permissions.size()];
         int permissionArrIndex = 0;
@@ -40,6 +40,6 @@ public class MyUserDetailService implements UserDetailsService {
             permissionArrIndex++;
         }
         System.out.println("UserDetailsService中的permissionArr============" + Arrays.toString(permissionArr));
-        return org.springframework.security.core.userdetails.User.withUsername(s).password(password).authorities(permissionArr).build();
+        return org.springframework.security.core.userdetails.User.withUsername(username).password(password).authorities(permissionArr).build();
     }
 }

@@ -14,10 +14,15 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
-//https://zhuanlan.zhihu.com/p/67519928
-// spring security + jwt :https://mp.weixin.qq.com/s/dk8CW5uvMPD-KE7ruaqwmA
+/*
+ * SpringBoot安全认证Security https://zhuanlan.zhihu.com/p/67519928
+ * spring security + jwt :https://mp.weixin.qq.com/s/dk8CW5uvMPD-KE7ruaqwmA
+ * Spring Security用户认证和权限控制（自定义实现） https://blog.csdn.net/weixin_44516305/article/details/88868791
+ */
+
 @Configuration
 @EnableWebSecurity
+//@EnableOAuth2Sso //单点登陆注解 https://mp.weixin.qq.com/s?__biz=MzI1NDY0MTkzNQ==&mid=2247488278&idx=1&sn=b21345a1daa86dd48ea89cdb9138def8&scene=21#wechat_redirect
 public class SecurityConfiguration {
 
     @Autowired
@@ -27,7 +32,10 @@ public class SecurityConfiguration {
     FailureHandler failureHandler;
 
     @Autowired
-    CustomizeSessionInformationExpiredStrategy sessionInformationExpiredStrategy;
+    SuccessHandler successHandler;
+
+    @Autowired
+    CustomSessionExpiredStrategy sessionInformationExpiredStrategy;
 
     @Bean
     public WebSecurityConfigurerAdapter webSecurityConfigurerAdapter() {
@@ -38,8 +46,8 @@ public class SecurityConfiguration {
             }
 
             @Override
-            protected void configure(HttpSecurity http) throws Exception {
-                http
+            protected void configure(HttpSecurity httpSecurity) throws Exception {
+                httpSecurity
                     .formLogin()
                         .loginPage("/login")
                         .loginProcessingUrl("/doLogin")
@@ -48,14 +56,15 @@ public class SecurityConfiguration {
                         //.passwordParameter("passwd")//不配置的话登陆表单参数必须为password
                         //.failureForwardUrl("/error")
                         .failureHandler(failureHandler)//登陆失败时将自定义信息写入session
+                        //.successHandler(successHandler)//登陆成功后的handler
                         .permitAll()//允许访问
                         .and()
-                    .sessionManagement()
+                    .sessionManagement()//session管理器
                         .maximumSessions(1)//相同用户只允许登陆1个
-                        //.maxSessionsPreventsLogin(true)//相同用户登陆后不允许在登陆
+                        //.maxSessionsPreventsLogin(true)//相同用户登陆后不允许在登陆（禁止新的登录）
                         .expiredSessionStrategy(sessionInformationExpiredStrategy)//自定义session过期策略
                         .and()
-                       // .invalidSessionUrl("/login")
+                    .invalidSessionUrl("/login")//session过期跳转地址
                         .and()
                     .rememberMe()
                         .rememberMeParameter("remember-me")
@@ -63,15 +72,13 @@ public class SecurityConfiguration {
                         .tokenValiditySeconds(60)//记住我的时间 (秒)
                         //.tokenRepository(persistentTokenRepository()) // 设置数据访问层
                         .and()
-                    .authorizeRequests()
+                    .authorizeRequests()//认证请求
                         .antMatchers("/guest/**","/error","/login").permitAll()// /guest/**的接口会被允许所有人访问，包括未登录的人。
                         .antMatchers("/admin/**").hasRole("adminRole")// /admin/**的接口只能被拥有admin角色的用户访问。
                         .antMatchers("/authenticated/**").authenticated()// /authenticated/**的接口可以被所有已经登录的用户访问。
-                        .antMatchers("/permission1/**").hasAuthority("permission1")// /permission1/的接口可以被拥有permission1权限的用户访问。/permission2/、/permission3/**、/permission4/**同理
-                        .antMatchers("/permission2/**").hasAuthority("permission2")
-                        .antMatchers("/permission3/**").hasAuthority("permission3")
-                        .antMatchers("/permission4/**").hasAuthority("permission4")
-                        .anyRequest().authenticated().
+                        .antMatchers("/permission/**").hasAuthority("permission")// /permission/的接口可以被拥有permission权限的用户访问。
+                        .antMatchers("/ipaddress/**").hasIpAddress("127.0.0.1")
+                        .anyRequest().authenticated().//所有的都需要认证
                         and()
                     .logout()
                         .logoutUrl("/logout_1")//spring security设置logout_1为系统退出的url 当监测到这个请求url时使用spring security处理登出逻辑 请求方式默认使用post a标签方式为get 可以在spring mvc中处理登出逻辑 但是这样的话就和spring security没关系了
@@ -80,55 +87,75 @@ public class SecurityConfiguration {
                         .deleteCookies()//用来清除 cookie
                         .permitAll()
                         .and()
+//                    .addFilterBefore(smsVerifyCodeValidateFilter, UsernamePasswordAuthenticationFilter.class)// 在UsernamePasswordAuthenticationFilter过滤器执行之前执行自定义的过滤器
                     .csrf().disable();
             }
 
-          /*  //代码创建用户密码
-            @Override
-            protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-                auth.inMemoryAuthentication()
-                        .withUser("user")
-                        .password("password")
-                        .roles("USER")
-                        .and()
-                        .withUser("admin")
-                        .password("admin")
-                        .roles("USER", "ADMIN");
-            }*/
+            //代码创建用户密码
+//            @Override
+//            protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//                auth.inMemoryAuthentication()
+//                        .withUser("user")
+//                        .password("password")
+//                        .roles("USER")
+//                        .and()
+//                        .withUser("admin")
+//                        .password("admin")
+//                        .roles("USER", "ADMIN");
+            /*
+             * 指定用户认证时，默认从哪里获取认证用户信息
+             */
+//        auth.userDetailsService(userDetailsServiceImpl);
+//            }
 
         };
 
     }
 
+    /**
+     * 密码加密策略
+     *
+     */
     @Bean
     PasswordEncoder passwordEncoder() {
-//        return NoOpPasswordEncoder.getInstance();//不加密 在demo中测试使用 生产环境不建议
+//        return NoOpPasswordEncoder.getInstance();// 不加密 在demo中测试使用 生产环境不建议
+//        return new BCryptPasswordEncoder();// BCryptPasswordEncoder：相同的密码明文每次生成的密文都不同，安全性更高
+
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
+    /**
+     * 角色集成 user角色能访问的admin也角色可以访问
+     *
+     */
     @Bean
-    RoleHierarchy roleHierarchy() {//角色集成 user角色能访问的admin也角色可以访问
+    RoleHierarchy roleHierarchy() {
         RoleHierarchyImpl hierarchy = new RoleHierarchyImpl();
         hierarchy.setHierarchy("ROLE_adminRole > ROLE_guestRole");
         return hierarchy;
     }
-    //防止当设置成相同用户登陆后不允许在登陆时第一个用户注销登录后无法继续登陆
+
+    /**
+     * 防止当设置成相同用户登陆后不允许在登陆时第一个用户注销登录后无法继续登陆
+     */
     @Bean
     HttpSessionEventPublisher httpSessionEventPublisher() {
         return new HttpSessionEventPublisher();
     }
+
+
     /**
      * 持久化token
      * Security中，默认是使用PersistentTokenRepository的子类InMemoryTokenRepositoryImpl，将token放在内存中
      * 如果使用JdbcTokenRepositoryImpl，会创建表persistent_logins，将token持久化到数据库
      */
- /*   @Bean
-    public PersistentTokenRepository persistentTokenRepository() {
-        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
-        tokenRepository.setDataSource(dataSource); // 设置数据源
-//        tokenRepository.setCreateTableOnStartup(true); // 启动创建表，创建成功后注释掉
-        return tokenRepository;
-    }*/
+//    @Bean
+//    public PersistentTokenRepository persistentTokenRepository() {
+//        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+//        tokenRepository.setDataSource(dataSource); // 设置数据源
+////        tokenRepository.setCreateTableOnStartup(true); // 系统启动时自动创建表，只需要在第一次启动系统时创建即可，因此这行代码只在需要创建表时才启用
+//        return tokenRepository;
+//    }
 }
 
 

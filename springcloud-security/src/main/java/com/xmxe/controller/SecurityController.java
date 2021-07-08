@@ -27,41 +27,33 @@ public class SecurityController {
         return "hello";
     }
 
-    @GetMapping("admin/getData")
+    @GetMapping("admin/1")
     @ResponseBody
     public String getAdminData() {
         return "adminData";
     }
 
-    @GetMapping("auth/getData")
+    @GetMapping("authenticated/1")
     @ResponseBody
     public String getAuthData() {
         return "authData";
     }
 
-    @GetMapping("guest/getData")
+    @GetMapping("guest/1")
     @ResponseBody
     public String getGuestData() {
         return "guestData";
     }
 
-    @GetMapping("permission1/getData")
+    @GetMapping("permission/1")
     @ResponseBody
     public String getPermission1Data() {
-        return "permission1Data";
+        return "permissionData";
     }
 
-    @GetMapping("permission2/getData")
+    @GetMapping("ipaddress/1")
     @ResponseBody
     public String getPermission2Data() {
-        return "permission2Data";
+        return "ipaddressData";
     }
-
-    @GetMapping("permission3/getData")
-    @ResponseBody
-    public String getPermission3Data() {
-        return "permission3Data";
-    }
-
-
 }

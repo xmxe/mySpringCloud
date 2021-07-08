@@ -16,10 +16,10 @@ spring:
     cache: false
     suffix: .html
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8080/eureka/
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8080/eureka/
 
 
 
