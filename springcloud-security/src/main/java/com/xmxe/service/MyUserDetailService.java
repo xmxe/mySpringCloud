@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Spring Security进行用户认证时，需要根据用户的账号、密码、权限等信息进行认证，
+ * 因此，需要根据查询到的用户信息封装成一个认证用户对象并交给Spring Security进行认证。
+ */
 @Service
 public class MyUserDetailService implements UserDetailsService {
     @Autowired
@@ -29,7 +33,9 @@ public class MyUserDetailService implements UserDetailsService {
         List<String> roles = loginService.getRoleByUsername(username);
         List<String> permissions = loginService.getPermissionsByUsername(username);
 
+        // 将用户拥有的权限放入数组
         String[] permissionArr = new String[roles.size() + permissions.size()];
+
         int permissionArrIndex = 0;
         for (String role : roles) {
             permissionArr[permissionArrIndex] = "ROLE_" + role;
